@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Statistik Kabupaten Kubu Raya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #0b4361;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 5%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .top-bar {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .top-bar li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .top-bar li a:hover, .top-bar li a.active {
+            color: #ffd700;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            width: 90%;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-header {
+            margin-bottom: 25px;
+            border-bottom: 2px solid #0b4361;
+            padding-bottom: 15px;
+        }
+
+        .content-header h2 {
+            color: #0b4361;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .content-header p {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .data-table th, .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .data-table th {
+            background-color: #0b4361;
+            color: #ffffff;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .data-table td.number-col {
+            text-align: right;
+        }
+
+        .data-table th.number-col {
+            text-align: right;
+        }
+
+        .data-table tr.total-row {
+            background-color: #e2e8f0;
+            font-weight: 700;
+            color: #0b4361;
+        }
+
+        .data-table tr.total-row td {
+            border-top: 2px solid #0b4361;
+            border-bottom: 2px solid #0b4361;
+        }
+
+        .source-note {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #777;
+            font-style: italic;
+        }
+
+        .footer-top {
+            background-color: #122b39;
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: auto;
+        }
+
+        .footer-top .footer-logo {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .footer-top p {
+            font-size: 16px;
+            font-weight: 400;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .top-bar {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .top-bar li a {
+                font-size: 13px;
+                padding: 6px 10px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-logo">
+            <img src="https://kuburaya.go.id/assets/img/logo-hut80xKKR.gif" alt="Logo Kabupaten Kubu Raya">
+        </div>
+
+        <nav>
+            <ul class="top-bar">
+                <li><a href="#" class="active">Penduduk</a></li>
+                <li><a href="#">Geografi dan Iklim</a></li>
+                <li><a href="#">Pemerintahan</a></li>
+                <li><a href="#">Sosial</a></li>
+                <li><a href="#">Pertanian</a></li>
+                <li><a href="#">Industri</a></li>
+                <li><a href="#">Pariwisata dan Kebudayaan</a></li>
+                <li><a href="#">Keuangan</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="content-header">
+            <h2>Jumlah Penduduk Menurut Kelompok Umur dan Jenis Kelamin</h2>
+            <p>Kabupaten Kubu Raya, 2025</p>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Kelompok Umur</th>
+                        <th class="number-col">Laki-Laki (Jiwa)</th>
+                        <th class="number-col">Perempuan (Jiwa)</th>
+                        <th class="number-col">Laki-Laki + Perempuan (Jiwa)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0-4</td>
+                        <td class="number-col">30.252</td>
+                        <td class="number-col">28.989</td>
+                        <td class="number-col">59.241</td>
+                    </tr>
+                    <tr>
+                        <td>5-9</td>
+                        <td class="number-col">28.192</td>
+                        <td class="number-col">26.861</td>
+                        <td class="number-col">55.053</td>
+                    </tr>
+                    <tr>
+                        <td>10-14</td>
+                        <td class="number-col">27.844</td>
+                        <td class="number-col">26.497</td>
+                        <td class="number-col">54.341</td>
+                    </tr>
+                    <tr>
+                        <td>15-19</td>
+                        <td class="number-col">28.151</td>
+                        <td class="number-col">26.205</td>
+                        <td class="number-col">54.356</td>
+                    </tr>
+                    <tr>
+                        <td>20-24</td>
+                        <td class="number-col">26.971</td>
+                        <td class="number-col">25.580</td>
+                        <td class="number-col">52.551</td>
+                    </tr>
+                    <tr>
+                        <td>25-29</td>
+                        <td class="number-col">29.731</td>
+                        <td class="number-col">28.519</td>
+                        <td class="number-col">58.250</td>
+                    </tr>
+                    <tr>
+                        <td>30-34</td>
+                        <td class="number-col">28.802</td>
+                        <td class="number-col">27.052</td>
+                        <td class="number-col">55.854</td>
+                    </tr>
+                    <tr>
+                        <td>35-39</td>
+                        <td class="number-col">26.379</td>
+                        <td class="number-col">25.372</td>
+                        <td class="number-col">51.751</td>
+                    </tr>
+                    <tr>
+                        <td>40-44</td>
+                        <td class="number-col">23.649</td>
+                        <td class="number-col">22.799</td>
+                        <td class="number-col">46.448</td>
+                    </tr>
+                    <tr>
+                        <td>45-49</td>
+                        <td class="number-col">21.570</td>
+                        <td class="number-col">20.711</td>
+                        <td class="number-col">42.281</td>
+                    </tr>
+                    <tr>
+                        <td>50-54</td>
+                        <td class="number-col">18.823</td>
+                        <td class="number-col">18.495</td>
+                        <td class="number-col">37.318</td>
+                    </tr>
+                    <tr>
+                        <td>55-59</td>
+                        <td class="number-col">15.831</td>
+                        <td class="number-col">15.522</td>
+                        <td class="number-col">31.353</td>
+                    </tr>
+                    <tr>
+                        <td>60-64</td>
+                        <td class="number-col">12.531</td>
+                        <td class="number-col">11.912</td>
+                        <td class="number-col">24.443</td>
+                    </tr>
+                    <tr>
+                        <td>65-69</td>
+                        <td class="number-col">8.381</td>
+                        <td class="number-col">7.957</td>
+                        <td class="number-col">16.338</td>
+                    </tr>
+                    <tr>
+                        <td>70-74</td>
+                        <td class="number-col">5.461</td>
+                        <td class="number-col">5.431</td>
+                        <td class="number-col">10.892</td>
+                    </tr>
+                    <tr>
+                        <td>75+</td>
+                        <td class="number-col">4.848</td>
+                        <td class="number-col">5.052</td>
+                        <td class="number-col">9.900</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td>Jumlah / Total</td>
+                        <td class="number-col">337.416</td>
+                        <td class="number-col">322.954</td>
+                        <td class="number-col">660.370</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="source-note">Keterangan: Proyeksi Penduduk Sementara (Interim) 2024 Pertengahan Tahun/BPS-Statistics of Kubu Raya Interim Population Projection 2024 mid-year</p>
+    </main>
+
+    <footer class="footer-top">
+        <img class="footer-logo" src="https://kuburaya.go.id/assets/img/PemkabPutih.png" alt="Logo Pemkab Putih">
+        <p>Jl. Supadio, Arang Limbung, Kec. Sungai Raya, Kabupaten Kubu Raya, Kalimantan Barat 78391</p>
+    </footer>
+
+</body>
+</html>
